@@ -13,6 +13,7 @@ const socket = io();
 
 socket.on("estado-actual", (payload) => {
   const [ticket1, ticket2, ticket3, ticket4] = payload;
+  
 
   if (ticket1) {
     lblTicket1.innerText = "Ticket " + ticket1.numero;
@@ -33,4 +34,6 @@ socket.on("estado-actual", (payload) => {
     lblTicket4.innerText = "Ticket " + ticket4.numero;
     lblEscritorio4.innerText = ticket4.escritorio;
   }
+
+
 });

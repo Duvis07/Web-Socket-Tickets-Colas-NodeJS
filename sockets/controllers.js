@@ -7,6 +7,8 @@ const socketController = (socket) => {
   socket.emit("ultimo-ticket", ticketControl.ultimo);
   // Muestra los ultimos 4 tickets que se atendieron en pantalla
   socket.emit("estado-actual", ticketControl.ultimos4);
+  // Muestra el ultimo ticket que se atendio en pantalla al recargar la pagina
+  socket.emit("tickets-pendientes", ticketControl.tickets.length);
 
   socket.on("siguiente-ticket", (payload, callback) => {
     const siguiente = ticketControl.siguiente();
@@ -25,6 +27,8 @@ const socketController = (socket) => {
 
     // Actualizar / notificar cambios en los ultimos 4
     socket.broadcast.emit("estado-actual", ticketControl.ultimos4);
+    socket.emit("tickets-pendientes", ticketControl.tickets.length);
+    socket.broadcast.emit("tickets-pendientes", ticketControl.tickets.length);
 
     if (!ticket) {
       return callback({
