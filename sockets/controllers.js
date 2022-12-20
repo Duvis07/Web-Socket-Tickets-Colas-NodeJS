@@ -13,6 +13,7 @@ const socketController = (socket) => {
   socket.on("siguiente-ticket", (payload, callback) => {
     const siguiente = ticketControl.siguiente();
     callback(siguiente);
+    socket.broadcast.emit("tickets-pendientes", ticketControl.tickets.length);
   });
 
   socket.on("atender-ticket", ({ escritorio }, callback) => {

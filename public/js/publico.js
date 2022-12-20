@@ -12,8 +12,11 @@ const lblEscritorio4 = document.querySelector("#lblEscritorio4");
 const socket = io();
 
 socket.on("estado-actual", (payload) => {
+  // Generar audio para notificar que hay un nuevo ticket
+  const audio = new Audio('./audio/new-ticket.mp3');
+  audio.play();
+
   const [ticket1, ticket2, ticket3, ticket4] = payload;
-  
 
   if (ticket1) {
     lblTicket1.innerText = "Ticket " + ticket1.numero;
@@ -34,6 +37,4 @@ socket.on("estado-actual", (payload) => {
     lblTicket4.innerText = "Ticket " + ticket4.numero;
     lblEscritorio4.innerText = ticket4.escritorio;
   }
-
-
 });
